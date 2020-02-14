@@ -5,8 +5,6 @@ const options = {
 const showClock = () => clock.innerText = (new Date()).toLocaleTimeString("uk", options);
 setInterval(showClock, 1000);
 
-
-
 const rulesBtn = document.getElementById('rules-btn');
 const closeBtn = document.getElementById('close-btn');
 const rules = document.getElementById('rules');
@@ -18,7 +16,6 @@ let score = 0;
 const brickRowCount = 6;
 const brickColumnCount = 3;
 
-// Create ball props
 const ball = {
   x: canvas.width / 2,
   y: canvas.height / 2,
@@ -28,7 +25,6 @@ const ball = {
   dy: -4
 };
 
-// Create paddle props
 const paddle = {
   x: canvas.width / 2 - 40,
   y: canvas.height - 20,
@@ -38,7 +34,6 @@ const paddle = {
   dx: 0
 };
 
-// Create brick props
 const brickInfo = {
   w: 110,
   h: 20,
@@ -48,7 +43,6 @@ const brickInfo = {
   visible: true
 };
 
-// Create bricks
 const bricks = [];
 for (let i = 0; i < brickRowCount; i++) {
   bricks[i] = [];
@@ -59,7 +53,6 @@ for (let i = 0; i < brickRowCount; i++) {
   }
 }
 
-// Draw ball on canvas
 function drawBall() {
   ctx.beginPath();
   ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
@@ -68,7 +61,6 @@ function drawBall() {
   ctx.closePath();
 }
 
-// Draw paddle on canvas
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h);
@@ -77,15 +69,12 @@ function drawPaddle() {
   ctx.closePath();
 }
 
-// Draw score oon canvas
 function drawScore() {
   ctx.font = '20px Arial';
   ctx.fillText(`Балы: ${score}`, canvas.width - 100, 30);
   
 }
 
-
-// Draw bricks on canvas
 function drawBricks() {
   bricks.forEach(column => {
     column.forEach(brick => {
@@ -98,11 +87,9 @@ function drawBricks() {
   });
 }
 
-// Move paddle on canvas
 function movePaddle() {
   paddle.x += paddle.dx;
 
-  // Wall detection
   if (paddle.x + paddle.w > canvas.width) {
     paddle.x = canvas.width - paddle.w;
   }
@@ -112,24 +99,18 @@ function movePaddle() {
   }
 }
 
-// Move ball on canvas
 function moveBall() {
   ball.x += ball.dx;
   ball.y += ball.dy;
 
-  // Wall collision (right/left)
   if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
-    ball.dx *= -1; // ball.dx = ball.dx * -1
+    ball.dx *= -1; 
   }
 
-  // Wall collision (top/bottom)
   if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
     ball.dy *= -1;
   }
 
-  // console.log(ball.x, ball.y);
-
-  // Paddle collision
   if (
     ball.x - ball.size > paddle.x &&
     ball.x + ball.size < paddle.x + paddle.w &&
@@ -138,15 +119,14 @@ function moveBall() {
     ball.dy = -ball.speed;
   }
 
-  // Brick collision
   bricks.forEach(column => {
     column.forEach(brick => {
       if (brick.visible) {
         if (
-          ball.x - ball.size > brick.x && // left brick side check
-          ball.x + ball.size < brick.x + brick.w && // right brick side check
-          ball.y + ball.size > brick.y && // top brick side check
-          ball.y - ball.size < brick.y + brick.h // bottom brick side check
+          ball.x - ball.size > brick.x && 
+          ball.x + ball.size < brick.x + brick.w && 
+          ball.y + ball.size > brick.y && 
+          ball.y - ball.size < brick.y + brick.h 
         ) {
           ball.dy *= -1;
           brick.visible = false;
@@ -157,14 +137,14 @@ function moveBall() {
     });
   });
 
-  // Hit bottom wall - Lose
   if (ball.y + ball.size > canvas.height) {
     showAllBricks();
+    alert( 'Еще попытка!' );
     score = 0;
   }
-}
 
-// Increase score
+}
+  
 function increaseScore() {
   score++;
 
@@ -173,16 +153,14 @@ function increaseScore() {
   }
 }
 
-// Make all bricks appear
 function showAllBricks() {
   bricks.forEach(column => {
     column.forEach(brick => (brick.visible = true));
   });
 }
 
-// Draw everything
 function draw() {
-  // clear canvas
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   drawBall();
@@ -191,12 +169,10 @@ function draw() {
   drawBricks();
 }
 
-// Update canvas drawing and animation
 function update() {
   movePaddle();
   moveBall();
 
-  // Draw everything
   draw();
 
   requestAnimationFrame(update);
@@ -204,7 +180,6 @@ function update() {
 
 update();
 
-// Keydown event
 function keyDown(e) {
   if (e.key === 'Right' || e.key === 'ArrowRight') {
     paddle.dx = paddle.speed;
@@ -213,7 +188,6 @@ function keyDown(e) {
   }
 }
 
-// Keyup event
 function keyUp(e) {
   if (
     e.key === 'Right' ||
@@ -225,10 +199,9 @@ function keyUp(e) {
   }
 }
 
-// Keyboard event handlers
+
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
 
-// Rules and close event handlers
 rulesBtn.addEventListener('click', () => rules.classList.add('show'));
 closeBtn.addEventListener('click', () => rules.classList.remove('show'));

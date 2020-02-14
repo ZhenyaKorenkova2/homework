@@ -8,40 +8,62 @@
     <title>Домашняя работа</title>
   </head>
   <body>
-  <section>
-        
-  <div id="shapka"><div class="clock"></div></div>
+
+    <section>
+        <div id="shapka"><div class="clock"></div></div>
+            <h1>Вперед!</h1>
+            <button id="rules-btn" class="btn rules-btn">Показать правила</button>
+        <div id="rules" class="rules">
+            <h2>Правила игры:</h2>
+            <p>Используйте правую и левую клавиши, чтобы переместить платформу, с помощью мяча разбейте все блоки.</p>
+            <p>Если вы пропустите мяч, ваш счет и блоки будут сброшены.</p>
+            <p>Если Вам понравилась эта игра Вы можете связаться  с 
+            <a href="traversymedia@gmail.com"><i>Traversy Media.</i></a></p>
+        <section>
+            <h2>Ваши контакти</h2>
+            <form method="POST" action="https://formspree.io/mdogonrp">
+                <lable>Имя:
+                    <input type="text" placeholder="Имя" required="" name="text">
+                </lable>
+                <lable>Почта:
+                    <input type="email" placeholder="Почта" required="" name="email">
+                </lable>
+                    <input type="submit">
+                <br>
+                <lable>Оцените игру:</lable>  
+                <br>
+                <lable>
+                    <input type="radio" name="Ваш выбор">1
+                </lable>    
+                <br>
+                <lable>
+                    <input type="radio" name="Ваш выбор">2
+                </lable>  
+                <br>
+                <lable>
+                    <input type="radio" name="Ваш выбор">3
+                </lable>  
+                <br>
+                <lable>
+                    <input type="radio" name="Ваш выбор">4
+                </lable>  
+                <br>
+                <lable>
+                    <input type="radio" name="Элементарно" >5
+                </lable>  
+            
+                <br>
+                <lable>Ваши предложения для улучшения:
+                    <input type="text" placeholder="Ваши предложения для улучшения" required="" name="text">
+                </lable>
+            </form>
+        </section>
+            <br>
+            <button id="close-btn" class="btn">Закрыть</button>
+        </div>
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <script src="script.js"></script>
+    </section>
     
-    <h1>Вперед!</h1>
-    <button id="rules-btn" class="btn rules-btn">Показать правила</button>
-   
-    <div id="rules" class="rules">
-      <h2>Правила игры:</h2>
-      <p>
-        Используйте правую и левую клавиши, чтобы переместить платформу, с помощью мяча разбейте все блоки.
-      </p>
-      <p>Если вы пропустите мяч, ваш счет и блоки будут сброшены.</p>
-      <button id="close-btn" class="btn">Закрыть</button>
-    </div>
-    
-
-    <canvas id="canvas" width="800" height="600"></canvas>
-
-    <script src="script.js"></script>
-      </section>
-
 </body> 
-   
-         
-    
-
-    
-
-
-
-
-
-
-    <script src="script.js"></script>
-  </body>
 </html>
